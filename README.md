@@ -27,9 +27,8 @@
         use one or more
         bitwise operations of the C language to solve the task; have a looped menu with
         which the user can select the "getting started" action,
-        including the choice of the data input method for filling arrays (manual input or
-        filling with random values); exit.
-        Table 5 - Options for task No. 2 of control work No. 2
+        including the choice of the data input method for filling arrays (manual input
+        or filling with random values), the "exit" action. The count of the sequence numbers of bits starts with 1.
     </p>
 
 <img src="Pics/FN_CW3_task2_xvar_.jpg">
