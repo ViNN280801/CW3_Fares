@@ -16,7 +16,7 @@
         the "exit" action.
     </p>
 
-<img src="Pics/FN_CW3_task1_xvar.jpg">
+<img src="Pics/FN_CW3_task1_xvar_.jpg">
 
 <h3>Task 2. Working with bits</h3>
     <p>
@@ -32,7 +32,7 @@
         Table 5 - Options for task No. 2 of control work No. 2
     </p>
 
-<img src="Pics/FN_CW3_task2_xvar.jpg">
+<img src="Pics/FN_CW3_task2_xvar_.jpg">
 
 <h3>Task 3. Pointers to functions</h3>
     <p>
@@ -45,4 +45,4 @@
         (manual input or filling with random values), the "exit" action.
     </p>
 
-<img src="Pics/FN_CW3_task3_xvar.jpg">
+<img src="Pics/FN_CW3_task3_xvar_.jpg">
