@@ -239,7 +239,7 @@ int main(void)
             printf("Выход ...\n");
             exit(0);
         }
-        else
+        else if (submenu_var != 1 && submenu_var != 2)
         {
             printf("Ошибка ввода, попробуйте ещё раз\n");
         }
