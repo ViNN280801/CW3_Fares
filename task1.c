@@ -97,146 +97,152 @@ int main(void)
         printf("1. Начало работы\n2. Выход\nВвод: ");
         submenu_var = inputInt();
 
-        if (submenu_var == 2)
+        if (submenu_var == 1)
+        {
+            /* Подменю */
+            while (true)
+            {
+                printf("1. Ручной ввод\n2. Заполнение случайными числами\n3. Выход\nВвод: ");
+                menu_var = inputInt();
+                if (menu_var == 1)
+                {
+                    int m = 0;
+                    printf("Введите размер количество строк/колонок (матрица квадратная): ");
+                    while (true)
+                    {
+                        m = inputInt();
+
+                        if ((m > 7) || (m < 0))
+                            printf("Неверно введён размер. Попробуйте снова: ");
+                        else
+                            break;
+                    }
+
+                    /* Выделение памяти */
+                    double *p = (double *)calloc((size_t)(m * m), sizeof(double));
+
+                    /* Проверка на правильность выделения памяти */
+                    if (p == NULL)
+                    {
+                        printf("Не удалось выделить память для массива. Принудительный выход.\n");
+                        exit(-1);
+                    }
+
+                    /* Ручное заполнение */
+                    for (int i = 0; i < (m * m); i++)
+                    {
+                        printf("p[%d] = ", i);
+                        scanf("%lf", &p[i]);
+                    }
+
+                    double **matrix = allocMemoryForDoubleMatrix(m, m);
+
+                    int index = 0;
+                    for (int i = 0; i < m; i++)
+                    {
+                        if ((i % 2) == 0)
+                        {
+                            for (int j = 0; j < m; j++)
+                            {
+                                matrix[i][j] = p[index];
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            for (int j = m - 1; j >= 0; j--)
+                            {
+                                matrix[i][j] = p[index];
+                                index++;
+                            }
+                        }
+                    }
+
+                    printDoubleArray(p, m * m);
+                    printDoubleMatrix(matrix, m, m);
+
+                    /* Освобождение памяти */
+                    deallocMemoryForDoubleMatrix(matrix, m);
+                    free(p);
+                    p = NULL;
+                }
+                else if (menu_var == 2)
+                {
+                    /* Устанавливает в качестве базы текущее время */
+                    srand(time(NULL));
+
+                    /* Число от 1 до 7 */
+                    int m = rand() % 7 + 1;
+
+                    /* Выделение памяти */
+                    double *p = (double *)calloc((size_t)(m * m), sizeof(double));
+
+                    /* Проверка на правильность выделения памяти */
+                    if (p == NULL)
+                    {
+                        printf("Не удалось выделить память для массива. Принудительный выход.\n");
+                        exit(-1);
+                    }
+
+                    /* Заполнение случайными числами */
+                    for (int i = 0; i < (m * m); i++)
+                    {
+                        double f = (double)rand() / RAND_MAX;
+                        p[i] = 1 + f * 9;
+                    }
+
+                    double **matrix = allocMemoryForDoubleMatrix(m, m);
+
+                    int index = 0;
+                    for (int i = 0; i < m; i++)
+                    {
+                        if ((i % 2) == 0)
+                        {
+                            for (int j = 0; j < m; j++)
+                            {
+                                matrix[i][j] = p[index];
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            for (int j = m - 1; j >= 0; j--)
+                            {
+                                matrix[i][j] = p[index];
+                                index++;
+                            }
+                        }
+                    }
+
+                    printDoubleArray(p, m * m);
+                    printDoubleMatrix(matrix, m, m);
+
+                    /* Освобождение памяти */
+                    deallocMemoryForDoubleMatrix(matrix, m);
+                    free(p);
+                    p = NULL;
+                }
+                else if (menu_var == 3)
+                {
+                    printf("Выход ...\n");
+                    break;
+                }
+                else
+                {
+                    printf("Ошибка ввода, попробуйте ещё раз\n");
+                }
+            }
+            /* Конец подменю */
+        }
+        else if (submenu_var == 2)
         {
             printf("Выход ...\n");
             exit(0);
         }
-
-        /* Подменю */
-        while (true)
+        else
         {
-            printf("1. Ручной ввод\n2. Заполнение случайными числами\n3. Выход\nВвод: ");
-            menu_var = inputInt();
-            if (menu_var == 1)
-            {
-                int m = 0;
-                printf("Введите размер количество строк/колонок (матрица квадратная): ");
-                while (true)
-                {
-                    m = inputInt();
-
-                    if ((m > 7) || (m < 0))
-                        printf("Неверно введён размер. Попробуйте снова: ");
-                    else
-                        break;
-                }
-
-                /* Выделение памяти */
-                double *p = (double *)calloc((size_t)(m * m), sizeof(double));
-
-                /* Проверка на правильность выделения памяти */
-                if (p == NULL)
-                {
-                    printf("Не удалось выделить память для массива. Принудительный выход.\n");
-                    exit(-1);
-                }
-
-                /* Ручное заполнение */
-                for (int i = 0; i < (m * m); i++)
-                {
-                    printf("p[%d] = ", i);
-                    scanf("%lf", &p[i]);
-                }
-
-                double **matrix = allocMemoryForDoubleMatrix(m, m);
-
-                int index = 0;
-                for (int i = 0; i < m; i++)
-                {
-                    if ((i % 2) == 0)
-                    {
-                        for (int j = 0; j < m; j++)
-                        {
-                            matrix[i][j] = p[index];
-                            index++;
-                        }
-                    }
-                    else
-                    {
-                        for (int j = m - 1; j >= 0; j--)
-                        {
-                            matrix[i][j] = p[index];
-                            index++;
-                        }
-                    }
-                }
-
-                printDoubleArray(p, m * m);
-                printDoubleMatrix(matrix, m, m);
-
-                /* Освобождение памяти */
-                deallocMemoryForDoubleMatrix(matrix, m);
-                free(p);
-                p = NULL;
-            }
-            else if (menu_var == 2)
-            {
-                /* Устанавливает в качестве базы текущее время */
-                srand(time(NULL));
-
-                /* Число от 1 до 7 */
-                int m = rand() % 7 + 1;
-
-                /* Выделение памяти */
-                double *p = (double *)calloc((size_t)(m * m), sizeof(double));
-
-                /* Проверка на правильность выделения памяти */
-                if (p == NULL)
-                {
-                    printf("Не удалось выделить память для массива. Принудительный выход.\n");
-                    exit(-1);
-                }
-
-                /* Заполнение случайными числами */
-                for (int i = 0; i < (m * m); i++)
-                {
-                    double f = (double)rand() / RAND_MAX;
-                    p[i] = 1 + f * 9;
-                }
-
-                double **matrix = allocMemoryForDoubleMatrix(m, m);
-
-                int index = 0;
-                for (int i = 0; i < m; i++)
-                {
-                    if ((i % 2) == 0)
-                    {
-                        for (int j = 0; j < m; j++)
-                        {
-                            matrix[i][j] = p[index];
-                            index++;
-                        }
-                    }
-                    else
-                    {
-                        for (int j = m - 1; j >= 0; j--)
-                        {
-                            matrix[i][j] = p[index];
-                            index++;
-                        }
-                    }
-                }
-
-                printDoubleArray(p, m * m);
-                printDoubleMatrix(matrix, m, m);
-
-                /* Освобождение памяти */
-                deallocMemoryForDoubleMatrix(matrix, m);
-                free(p);
-                p = NULL;
-            }
-            else if (menu_var == 3)
-            {
-                printf("Выход ...\n");
-                break;
-            }
-            else
-            {
-                printf("Ошибка ввода, попробуйте ещё раз\n");
-            }
+            printf("Ошибка ввода, попробуйте ещё раз\n");
         }
-        /* Конец подменю */
     }
     /* Конец меню */
 }
